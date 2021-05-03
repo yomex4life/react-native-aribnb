@@ -6,7 +6,6 @@ import "./home.css"
 
 export default function Home() {
     return (
-        <div>
             <>
                 <Nav />
                 <div className="homeContainer">
@@ -16,6 +15,5 @@ export default function Home() {
                 </div>
             </>
            
-        </div>
     )
 }
