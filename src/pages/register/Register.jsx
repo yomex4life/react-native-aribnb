@@ -9,7 +9,7 @@ export default function Register() {
                     <span className="loginDesc">Connect with friends and world around you</span>
                 </div>
                 <div className="loginRight">
-                    <div className="loginBox">
+                    <div className="registerBox">
                         <input placeholder="Email" className="loginInput" />
                         <input placeholder="Firstname" className="loginInput" />
                         <input placeholder="Lastname" className="loginInput" />
