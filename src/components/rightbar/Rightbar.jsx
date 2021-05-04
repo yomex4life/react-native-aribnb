@@ -2,7 +2,7 @@ import "./rightbar.css"
 import {Users} from "../../dummyData"
 import OnlineFriends from "../online/OnlineFriends"
 
-export default function Rightbar({profile}) {
+export default function Rightbar() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER 
 
     return (

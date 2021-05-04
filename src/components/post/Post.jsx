@@ -2,24 +2,25 @@ import "./post.css"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { MoreVert } from "@material-ui/icons"
+import {format} from "timeago.js"
+import { Link } from 'react-router-dom'
 
 export default function Post({ post}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER 
+    const baseUrl = "http://localhost:5000/api"
 
-    const [like, setLike] = useState(post.like)
+    const [like, setLike] = useState(post.likes.length)
     const [isLiked, setIsLiked] = useState(false)
     const [user, setUsers] = useState([])
-    console.log(post)
 
     useEffect(() =>{
         const fetchUsers = async ()=>{
             //const response = await axios.get("http://localhost:5000/api/users/608e979c3f085e489c33f8d3")
-            const response = await axios.get(`http://localhost:5000/api/users/${post.userId}`)
+            const response = await axios.get(`${baseUrl}/users/${post.userId}`)
             setUsers(response.data)
         }
         fetchUsers();
-        //console.log(fetchPost)
-    }, [])
+    }, [post.userId])
 
     const likeHandler = () =>{
         setLike(isLiked ? like-1 : like+1)
@@ -31,9 +32,11 @@ export default function Post({ post}) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img src={user.profilePicture} alt="" className="postProfileImg" />
+                        <Link to={`profile/${user._id}`}>
+                            <img src={user.profilePicture || PF+'person/noAvatar.png'} alt="" className="postProfileImg" />
+                        </Link>                       
                         <span className="postUsername">{user.lastName}</span>
-                        <span className="postDate">{post.createdAt}</span>
+                        <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
@@ -41,7 +44,7 @@ export default function Post({ post}) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img src={PF+post.photo} alt="" className="postCenterImg" />
+                    <img src={PF+post.image} alt="" className="postCenterImg" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
