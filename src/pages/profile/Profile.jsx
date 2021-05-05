@@ -12,7 +12,6 @@ export default function Profile(uid) {
     const baseUrl = "http://localhost:5000/api"
     const params = useParams()
 
-    console.log(params.uid)
     const [user, setUsers] = useState([])
 
     useEffect(() =>{

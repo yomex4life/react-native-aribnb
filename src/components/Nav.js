@@ -1,7 +1,13 @@
 import "./Nav.css"
 import {Search, Person, Chat, Notifications} from "@material-ui/icons"
+import { useContext } from "react"
+import { AuthContext } from "../context/AuthContext"
+import { Link } from "react-router-dom"
 
 export default function Nav() {
+    const {user} = useContext(AuthContext)
+    const userId = user ? user.user_id : ""
+    
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -32,7 +38,7 @@ export default function Nav() {
                         <span className="topbarIconBadge">1</span>
                     </div>
                 </div>
-                <img src="/assets/person/1.jpeg" alt="" className="topbarImage" />
+                <Link to={`/profile/${userId}`}><img src="/assets/person/1.jpeg" alt="" className="topbarImage" /></Link>
             </div>
         </div>
     )
